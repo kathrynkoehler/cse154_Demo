@@ -68,7 +68,7 @@ with st.container():
 
 # Interaction Demo
 st.divider()
-st.header("Fun buttons!")
+st.header("Beanie Baby Bot!")
 clicked = st.button("Click me")
 if clicked:
   st.balloons()
