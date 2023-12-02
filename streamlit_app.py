@@ -8,8 +8,8 @@ st.set_page_config(page_title="Cool website" ,page_icon = ":fire:", layout="wide
 def lottie_request(url):
   res = requests.get(url)
   if res.status_code != 200:
-    return None;
-  return res.json();
+    return None
+  return res.json()
 
 lottie_animation = lottie_request("https://lottie.host/063967a2-9475-494a-b25e-4be2af9e3d6f/z4iD50gHm8.json")
 
