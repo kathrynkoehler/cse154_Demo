@@ -11,6 +11,42 @@ async function main() {
   await scrape();
 };
 
+// /**
+//  * Downloads images from the web to local directory based on url.
+//  * @param url - the source url of the image
+//  * @param destination - the local directory path to save the image to
+//  */
+async function screenshot(filename) {
+  let browser;
+  try {
+    browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.setViewport({width: 100, height: 100});
+    let url = `https://www.angelfire.com/ar/bbcollector/images/${filename.split("/").pop()}`;
+    await page.goto(url);
+    await page.screenshot({"path": filename});
+    await browser.close();
+  } catch (err) {
+    console.log(err);
+    await browser.close();
+  }
+}
+
+// async function downloadImage(url, destination) {
+//   const response = await fetch(url);
+
+//   if (!response.ok) {
+//     throw new Error(`Failed to download image from ${url}. Status: ${response.status}`);
+//   }
+
+//   const buffer = await response.buffer();
+//   fs.writeFile(destination, buffer);
+// }
+
+
+/**
+ * Scrapes data from the web and saves to a local json file.
+ */
 async function scrape() {
   let browser;
   let beanieData;
@@ -43,23 +79,21 @@ async function scrape() {
     for (const baby of beanieData) {
       console.log(`Starting ${baby['name']} at url: ${baby['url']}...`);
       // Interval between sub-page requests
-      await new Promise(resolve => setTimeout(resolve, 250));
+      await new Promise(resolve => setTimeout(resolve, 100));
       // second run: get the image and poem from each sub-page
       await page.goto(baby['url']);
-      baby.details = await page.evaluate(() => {
+      // pass screenshot in as parameter so it's within scope
+      baby.details = await page.evaluate(async () => {
         let image = document.querySelector('center > img')?.src.trim() ?? "";
         let data;
 
         // check if image exists
         if (image != "") {
           // split on the '/'; the last index holds our image filename
-          let pieces = image.split('/');
-          let imageDest = `img/${pieces[-1]}`;
-          // download image to our /img folder
-          downloadImage(image, imageDest);
+          let dest = image.split('/').pop();
           // set our nested data to the relative path of the image and the associated poem
           data = {
-            'img': imageDest,
+            'img': `img/${dest}`,
             'poem': document.querySelector('center > h3 > b')?.innerHTML.replace(/<br>/g, " ").replace(/\\"/g, "'") ?? ""
           };
         } else {
@@ -71,6 +105,15 @@ async function scrape() {
 
         return data;
       });
+    }
+
+    // get images
+    for (const baby of beanieData) {
+      console.log(`Screenshot ${baby['name']} at url: ${baby['details']['img']}...`);
+      // Interval between sub-page requests
+      await new Promise(resolve => setTimeout(resolve, 250));
+      screenshot(baby['details']['img']);
+      // second run: get the image and poem from each sub-page
     };
 
     // write objects to json file, to be parsed into csv
@@ -83,17 +126,6 @@ async function scrape() {
     }
     console.log("/!\\ Done /!\\");
   }
-}
-
-async function downloadImage(url, destination) {
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    throw new Error(`Failed to download image from ${url}. Status: ${response.status}`);
-  }
-
-  const buffer = await response.buffer();
-  fs.writeFile(destination, buffer);
 }
 
 main();

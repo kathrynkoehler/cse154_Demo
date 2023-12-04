@@ -81,7 +81,7 @@ with st.container():
 # Interaction Demo
 st.divider()
 st.header("Beanie Baby Bot!")
-st.image('https://www.angelfire.com/ar/bbcollector/images/jabber.gif')
+st.image('img/bernie.gif')
 clicked = st.button("Click me")
 if clicked:
   st.balloons()
