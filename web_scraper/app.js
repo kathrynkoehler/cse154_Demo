@@ -32,18 +32,6 @@ async function screenshot(filename) {
   }
 }
 
-// async function downloadImage(url, destination) {
-//   const response = await fetch(url);
-
-//   if (!response.ok) {
-//     throw new Error(`Failed to download image from ${url}. Status: ${response.status}`);
-//   }
-
-//   const buffer = await response.buffer();
-//   fs.writeFile(destination, buffer);
-// }
-
-
 /**
  * Scrapes data from the web and saves to a local json file.
  */
@@ -90,16 +78,17 @@ async function scrape() {
         // check if image exists
         if (image != "") {
           // split on the '/'; the last index holds our image filename
-          let dest = image.split('/').pop();
+          let dest = image.split('/').pop().trim();
+          let poem = document.querySelector('center > h3 > b')?.innerHTML.replace(/<br>/g, " ").replace(/\\"/g, "'") ?? "";
           // set our nested data to the relative path of the image and the associated poem
           data = {
             'img': `img/${dest}`,
-            'poem': document.querySelector('center > h3 > b')?.innerHTML.replace(/<br>/g, " ").replace(/\\"/g, "'") ?? ""
+            'poem': poem.trim()
           };
         } else {
           data = {
             'img': "No image found",
-            'poem': document.querySelector('center > h3 > b')?.innerHTML.replace(/<br>/g, " ").replace(/\\"/g, "'") ?? ""
+            'poem': poem.trim()
           };
         }
 
@@ -112,12 +101,12 @@ async function scrape() {
       console.log(`Screenshot ${baby['name']} at url: ${baby['details']['img']}...`);
       // Interval between sub-page requests
       await new Promise(resolve => setTimeout(resolve, 250));
+      // screenshot each beanie baby image
       screenshot(baby['details']['img']);
-      // second run: get the image and poem from each sub-page
     };
 
     // write objects to json file, to be parsed into csv
-    fs.writeFile('data/beanieData.json', JSON.stringify(beanieData, null, 2));
+    await fs.writeFile('data/beanieData.json', JSON.stringify(beanieData, null, 2));
   } catch (error) {
     console.error(error);
   } finally {
