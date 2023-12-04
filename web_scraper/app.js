@@ -29,7 +29,7 @@ async function scrape() {
       const beanieBabyArray = Array.from(document.querySelectorAll('   li   '));
       // Loop over each beanie element
       return beanieBabyArray.map( beanie => {
-        const  url = 'https:' + beanie.querySelector('   a   ').getAttribute('href');
+        const url = 'https:' + beanie.querySelector('   a   ').getAttribute('href');
         const name = beanie.querySelector('   a   ').textContent.trim();
         // Return JSON entry
         return {
@@ -47,24 +47,53 @@ async function scrape() {
       // second run: get the image and poem from each sub-page
       await page.goto(baby['url']);
       baby.details = await page.evaluate(() => {
-        let data = {
-          'img': document.querySelector('center > img')?.src.trim() ?? "",
-          'poem': document.querySelector('center > h3 > b')?.innerHTML.replace(/<br>/g, " ").replace(/\\"/g, "'") ?? ""
-        };
+        let image = document.querySelector('center > img')?.src.trim() ?? "";
+        let data;
+
+        // check if image exists
+        if (image != "") {
+          // split on the '/'; the last index holds our image filename
+          let pieces = image.split('/');
+          let imageDest = `img/${pieces[-1]}`;
+          // download image to our /img folder
+          downloadImage(image, imageDest);
+          // set our nested data to the relative path of the image and the associated poem
+          data = {
+            'img': imageDest,
+            'poem': document.querySelector('center > h3 > b')?.innerHTML.replace(/<br>/g, " ").replace(/\\"/g, "'") ?? ""
+          };
+        } else {
+          data = {
+            'img': "No image found",
+            'poem': document.querySelector('center > h3 > b')?.innerHTML.replace(/<br>/g, " ").replace(/\\"/g, "'") ?? ""
+          };
+        }
+
         return data;
       });
     };
-    // write objects to json file, to be parsed into csv
-    fs.writeFile('data/beanieData.json', JSON.stringify(beanieData, null, 2))
 
+    // write objects to json file, to be parsed into csv
+    fs.writeFile('data/beanieData.json', JSON.stringify(beanieData, null, 2));
   } catch (error) {
     console.error(error);
   } finally {
     if (browser) {
       await browser.close();
     }
-    console.log("/!\\ Done /!\\")
+    console.log("/!\\ Done /!\\");
   }
+}
+
+async function downloadImage(url, destination) {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Failed to download image from ${url}. Status: ${response.status}`);
+  }
+
+  const buffer = await response.buffer();
+  fs.writeFile(destination, buffer);
 }
 
 main();
