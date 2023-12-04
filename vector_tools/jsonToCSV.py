@@ -13,4 +13,5 @@ with open('output.csv', 'w', newline='') as csvfile:
         details = item['details']
         row += [details['img'], details['poem']]
         print(row)
-        writer.writerow(row)
+        if (details['poem'] != ""):
+            writer.writerow(row)

@@ -21,14 +21,17 @@ async function scrape() {
     page.setDefaultNavigationTimeout(2 * 60 * 1000);
 
     console.log("/!\\ Starting scrape /!\\");
-    await page.goto(SCRAPE_URL);
 
-    // first run: gets teh name and url of subpage from main page list
+    // first run: gets the name and url of sub-pages from main page list
+    await page.goto(SCRAPE_URL);
     beanieData = await page.evaluate(() => {
-      const beanieBabyArray = Array.from(document.querySelectorAll('li'));
+      // Get all beanie baby elements
+      const beanieBabyArray = Array.from(document.querySelectorAll('   li   '));
+      // Loop over each beanie element
       return beanieBabyArray.map( beanie => {
-        const  url = 'https:' + beanie.querySelector('a').getAttribute('href');
-        const name = beanie.querySelector('a').textContent.trim();
+        const  url = 'https:' + beanie.querySelector('   a   ').getAttribute('href');
+        const name = beanie.querySelector('   a   ').textContent.trim();
+        // Return JSON entry
         return {
           "name": name,
           "url": url
@@ -36,14 +39,13 @@ async function scrape() {
       });
     });
 
-    // Scrapes beanie baby's subpages
+    // Scrapes beanie baby's sub-pages
     for (const baby of beanieData) {
       console.log(`Starting ${baby['name']} at url: ${baby['url']}...`);
-
-      // Interval between subpage requests
+      // Interval between sub-page requests
       await new Promise(resolve => setTimeout(resolve, 250));
+      // second run: get the image and poem from each sub-page
       await page.goto(baby['url']);
-      // second run: get the image and poem from each subpage
       baby.details = await page.evaluate(() => {
         let data = {
           'img': document.querySelector('center > img')?.src.trim() ?? "",
@@ -52,9 +54,9 @@ async function scrape() {
         return data;
       });
     };
-
     // write objects to json file, to be parsed into csv
-    fs.writeFile('data/beanieData.json', JSON.stringify(beanieData, null, 2));
+    fs.writeFile('data/beanieData.json', JSON.stringify(beanieData, null, 2))
+
   } catch (error) {
     console.error(error);
   } finally {

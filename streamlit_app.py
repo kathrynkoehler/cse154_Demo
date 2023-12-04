@@ -1,6 +1,5 @@
 import streamlit as st
 from openai import OpenAI
-import openai
 import pinecone
 import os
 import json
@@ -29,10 +28,7 @@ dimension = 1536 # opeanAI default
 
 index = pinecone.Index(index_name)
 
-#openai.api_key = OPENAI_API_KEY
 client = OpenAI(api_key=OPENAI_API_KEY)
-# openai.api_key = OPENAI_API_KEY
-
 
 # Search for beanie baby using Pinecone vector db
 def beanie_search(query):
@@ -43,6 +39,8 @@ def beanie_search(query):
     beanies = ""
     for match in res['matches']:
         beanies+=(f"{match['metadata']['text']}")
+
+    print(beanies)
     return beanies
 
 st.title("Beanie Baby Bot")
