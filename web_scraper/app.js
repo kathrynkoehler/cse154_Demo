@@ -22,7 +22,8 @@ async function screenshot(filename) {
     browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setViewport({width: 100, height: 100});
-    let url = `https://www.angelfire.com/ar/bbcollector/images/${filename.split("/").pop()}`;
+    let url = `https://www.angelfire.com/ar/bbcollector/images/` +
+      `${filename.split("/").pop()}`;
     await page.goto(url);
     await page.screenshot({"path": filename});
     await browser.close();
@@ -50,11 +51,11 @@ async function scrape() {
     await page.goto(SCRAPE_URL);
     beanieData = await page.evaluate(() => {
       // Get all beanie baby elements
-      const beanieBabyArray = Array.from(document.querySelectorAll('   li   '));
+      const beanieBabyArray = Array.from(document.querySelectorAll('li'));
       // Loop over each beanie element
       return beanieBabyArray.map( beanie => {
-        const url = 'https:' + beanie.querySelector('   a   ').getAttribute('href');
-        const name = beanie.querySelector('   a   ').textContent.trim();
+        const url = 'https:' + beanie.querySelector('a').getAttribute('href');
+        const name = beanie.querySelector('a').textContent.trim();
         // Return JSON entry
         return {
           "name": name,
@@ -117,4 +118,6 @@ async function scrape() {
   }
 }
 
+// we don't have any events driving our file, so we just want to call main
+// as soon as we start running
 main();
