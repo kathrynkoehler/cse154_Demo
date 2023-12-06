@@ -19,7 +19,6 @@ pinecone.init(
 loader = CSVLoader(file_path='output.csv')
 data = loader.load()
 embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-print(PINECONE_API_KEY)
 index_name="beanie-data"
 Pinecone.from_documents(data , embeddings, index_name=index_name)
 print(data)

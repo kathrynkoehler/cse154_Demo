@@ -78,15 +78,6 @@ with st.container():
     )
     st.markdown("[Link](www.example.com)")
 
-# Interaction Demo
-st.divider()
-st.header("Beanie Baby Bot!")
-st.image('img/bernie.gif')
-clicked = st.button("Click me")
-if clicked:
-  st.balloons()
-
-
 st.sidebar.markdown("# My website!")
 st.sidebar.markdown('''
 ## Sections

@@ -74,7 +74,6 @@ async function scrape() {
       baby.details = await page.evaluate(async () => {
         let image = document.querySelector('center > img')?.src.trim() ?? "";
         let data;
-
         // check if image exists
         if (image != "") {
           // split on the '/'; the last index holds our image filename
