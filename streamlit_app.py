@@ -47,7 +47,7 @@ with st.sidebar:
     st.markdown("# About 🙌")
     st.markdown("Beanie-GPT is your personal beanie baby curator!")
     st.markdown("With late 20th century knowledge of beanie babies, Beans can figure out which plush is just right for you!")
-    st.markdown("Unlike chatGPT, Beanie-GPT will answer using injected knowledge from [angelfire.com/ar/bbcollector](angelfire.com/ar/bbcollector).")
+    st.markdown("Unlike chatGPT, Beanie-GPT will answer using injected knowledge from [www.angelfire.com/ar/bbcollector/poems.html](https://www.angelfire.com/ar/bbcollector/poems.html).")
     st.markdown("---")
     st.markdown("An instructional project by Elias Belzberg & Kathryn Koehler")
     st.markdown("ebelz@cs.washington.edu")
@@ -108,7 +108,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 # communicating with the bot
-if prompt := st.chat_input("What is up?"):
+if prompt := st.chat_input("Find your Beanie Baby!"):
     beanie_req = beanie_search(prompt)
     image = beanie_req.splitlines()[2].split(" ")[-1]
     # case where no image exists

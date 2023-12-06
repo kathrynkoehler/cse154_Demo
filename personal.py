@@ -11,7 +11,6 @@ def lottie_request(url):
     return None
   return res.json()
 
-lottie_animation = lottie_request("https://lottie.host/063967a2-9475-494a-b25e-4be2af9e3d6f/z4iD50gHm8.json")
 
 st.header("Hi, Welcome to my website :wave:")
 st.divider()
@@ -29,15 +28,20 @@ with column1:
               """)
   st.write(
     """
-    Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Pulvinar mattis nunc sed blandit libero volutpat sed cras. Fringilla est ullamcorper eget nulla.
-    Egestas sed tempus urna et pharetra pharetra massa massa. Nunc vel risus commodo viverra maecenas accumsan lacus. Justo donec enim diam vulputate ut pharetra.
-    Metus aliquam eleifend mi in nulla posuere sollicitudin. Lobortis mattis aliquam faucibus purus. Massa tincidunt dui ut ornare lectus sit amet. Et molestie ac feugiat sed lectus vestibulum.
-    Mattis ullamcorper velit sed ullamcorper. Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Pulvinar sapien et ligula ullamcorper malesuada.
-    Orci phasellus egestas tellus rutrum tellus pellentesque. Ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet. Etiam erat velit scelerisque in dictum non consectetur.
+    Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Pulvinar mattis nunc sed
+    blandit libero volutpat sed cras. Fringilla est ullamcorper eget nulla. Egestas sed tempus
+    urna et pharetra pharetra massa massa. Nunc vel risus commodo viverra maecenas accumsan lacus.
+    Justo donec enim diam vulputate ut pharetra. Metus aliquam eleifend mi in nulla posuere
+    sollicitudin. Lobortis mattis aliquam faucibus purus. Massa tincidunt dui ut ornare lectus sit
+    amet. Et molestie ac feugiat sed lectus vestibulum. Mattis ullamcorper velit sed ullamcorper.
+    Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Pulvinar sapien et ligula
+    ullamcorper malesuada. Orci phasellus egestas tellus rutrum tellus pellentesque. Ut venenatis
+    tellus metus vulputate eu scelerisque felis imperdiet. Etiam erat velit scelerisque in dictum.
     """
   )
 
 with column2:
+  lottie_animation = lottie_request("https://lottie.host/063967a2-9475-494a-b25e-4be2af9e3d6f/z4iD50gHm8.json")
   st_lottie(lottie_animation, height=400)
 
 
@@ -51,15 +55,19 @@ with st.container():
   with text_column:
     st.subheader("My dubhacks project")
     st.write(
-     """
-    Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Pulvinar mattis nunc sed blandit libero volutpat sed cras. Fringilla est ullamcorper eget nulla.
-    Egestas sed tempus urna et pharetra pharetra massa massa. Nunc vel risus commodo viverra maecenas accumsan lacus. Justo donec enim diam vulputate ut pharetra.
-    Metus aliquam eleifend mi in nulla posuere sollicitudin. Lobortis mattis aliquam faucibus purus. Massa tincidunt dui ut ornare lectus sit amet. Et molestie ac feugiat sed lectus vestibulum.
-    Mattis ullamcorper velit sed ullamcorper. Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Pulvinar sapien et ligula ullamcorper malesuada.
-    Orci phasellus egestas tellus rutrum tellus pellentesque. Ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet. Etiam erat velit scelerisque in dictum non consectetur.
     """
-    )
-    st.markdown("[Link](www.example.com)")
+    Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Pulvinar mattis nunc sed
+    blandit libero volutpat sed cras. Fringilla est ullamcorper eget nulla. Egestas sed tempus
+    urna et pharetra pharetra massa massa. Nunc vel risus commodo viverra maecenas accumsan lacus.
+    Justo donec enim diam vulputate ut pharetra. Metus aliquam eleifend mi in nulla posuere
+    sollicitudin. Lobortis mattis aliquam faucibus purus. Massa tincidunt dui ut ornare lectus sit
+    amet. Et molestie ac feugiat sed lectus vestibulum. Mattis ullamcorper velit sed ullamcorper.
+    Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Pulvinar sapien et ligula
+    ullamcorper malesuada. Orci phasellus egestas tellus rutrum tellus pellentesque. Ut venenatis
+    tellus metus vulputate eu scelerisque felis imperdiet. Etiam erat velit scelerisque in dictum.
+    """
+  )
+    st.markdown("[Link](https:/www.example.com)")
 with st.container():
   st.header("Projects")
   img_column, text_column = st.columns((1,2))
@@ -68,29 +76,39 @@ with st.container():
   with text_column:
     st.subheader("Cool project from cse154")
     st.write(
-     """
-    Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Pulvinar mattis nunc sed blandit libero volutpat sed cras. Fringilla est ullamcorper eget nulla.
-    Egestas sed tempus urna et pharetra pharetra massa massa. Nunc vel risus commodo viverra maecenas accumsan lacus. Justo donec enim diam vulputate ut pharetra.
-    Metus aliquam eleifend mi in nulla posuere sollicitudin. Lobortis mattis aliquam faucibus purus. Massa tincidunt dui ut ornare lectus sit amet. Et molestie ac feugiat sed lectus vestibulum.
-    Mattis ullamcorper velit sed ullamcorper. Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Pulvinar sapien et ligula ullamcorper malesuada.
-    Orci phasellus egestas tellus rutrum tellus pellentesque. Ut venenatis tellus in metus vulputate eu scelerisque felis imperdiet. Etiam erat velit scelerisque in dictum non consectetur.
     """
-    )
-    st.markdown("[Link](www.example.com)")
+    Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Pulvinar mattis nunc sed
+    blandit libero volutpat sed cras. Fringilla est ullamcorper eget nulla. Egestas sed tempus
+    urna et pharetra pharetra massa massa. Nunc vel risus commodo viverra maecenas accumsan lacus.
+    Justo donec enim diam vulputate ut pharetra. Metus aliquam eleifend mi in nulla posuere
+    sollicitudin. Lobortis mattis aliquam faucibus purus. Massa tincidunt dui ut ornare lectus sit
+    amet. Et molestie ac feugiat sed lectus vestibulum. Mattis ullamcorper velit sed ullamcorper.
+    Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Pulvinar sapien et ligula
+    ullamcorper malesuada. Orci phasellus egestas tellus rutrum tellus pellentesque. Ut venenatis
+    tellus metus vulputate eu scelerisque felis imperdiet. Etiam erat velit scelerisque in dictum.
+    """
+  )
+    st.markdown("[Link](https:/www.example.com)")
 
-st.sidebar.markdown("# My website!")
-st.sidebar.markdown('''
-## Sections
-- [About Me](#about-me)
-- [Projects](#projects)
-- [Fun Buttons](#fun-buttons)
-''', unsafe_allow_html=True)
+# TODO: Interactions
 
-st.sidebar.markdown(
-      """
-      ## Contact
-      - ebelz@cs.washington.edu
-      - cel: 206.xxx.xxxx
-      """
-)
+st.divider()
 
+with st.container():
+  st.header("User interaction!")
+  clicked = st.button("click me")
+  if "clicked" not in st.session_state:
+    st.session_state.clicked = 0
+  if clicked:
+    st.session_state.clicked += 1
+    st.write(f"You clicked {st.session_state.clicked} times!")
+    st.balloons()
+
+st.sidebar.header("My website  :wave:")
+
+st.sidebar.markdown("""
+                    ## Contacts
+                    Elias Belzberg
+                    - ebelz@cs.washington.edu
+                    - 206.xxx.xxxx
+                    """)
