@@ -5,7 +5,6 @@ import os
 import json
 from dotenv import load_dotenv
 
-
 DEBUG = False
 
 #=====================================================#
@@ -38,7 +37,7 @@ index = pinecone.Index(index_name)
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 #=====================================================#
-#               Font-end, yup that's it!              #
+#                    Front-end                        #
 #=====================================================#
 st.set_page_config(page_title="Beanie Baby Bot", page_icon=":bug:")
 st.title("Beans, the Beanie Baby chatbot")
@@ -52,8 +51,8 @@ with st.sidebar:
     st.markdown("An instructional project by Elias Belzberg & Kathryn Koehler")
     st.markdown("ebelz@cs.washington.edu")
     st.markdown("kkoe@cs.washington.edu")
-    st.markdown("Code available here!\n"
-                "[github.com/kathrynkoehler/cse154_Demo](https://github.com/kathrynkoehler/cse154_Demo)")
+    # st.markdown("Code available here!\n"
+    #             "[github.com/kathrynkoehler/cse154_Demo](https://github.com/kathrynkoehler/cse154_Demo)")
     st.markdown("---")
     st.markdown("Tech this project uses:\n"
                 "- OpenAI gpt3.5 turbo LLM\n"
